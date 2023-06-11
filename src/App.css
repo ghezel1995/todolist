@@ -2,6 +2,8 @@ body {
   background-color: #222831;
   color: #eeeeee;
   font-size: 2rem;
+  font-family: 'Aref Ruqaa Ink', serif;
+  font-family: 'Signika Negative', sans-serif;
 }
 .todo-container {
   background-color: #2d4059;
@@ -12,17 +14,50 @@ body {
   flex-direction: column;
   align-items: center;
 }
-ul{
+ul {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 }
 .todo-li {
-  width: 100vh;
+  width: 95%;
   margin: 10px 5px;
   list-style: none;
   border: 1px solid #ff895d;
   border-radius: 10px;
   padding: 1.5vh;
+  display: flex;
+  justify-content: space-between;
 }
+.title-container{
+  width: auto;
+}
+
+.btn-container{
+  width: 25%;
+  text-align: right;
+}
+
+i{
+  background: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-left: 1.2vh;
+  margin-right: 2vh;
+}
+
+.mark-btn {
+  color: #88e1f2;
+}
+.mark-btn:hover {
+  background-color: #88e1f2;
+  color: #2d4059;
+}
+.edit-btn {
+  color: #ffd082;
+}
+.delete-btn {
+  color: #ff7c7c;
+}
+
