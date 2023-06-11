@@ -48,10 +48,13 @@ i {
   margin-right: 2vh;
 }
 .completed-icon {
-  color: #88e1f2;
+  color: aquamarine;
 }
 .incomplete-icon {
-  color: #ff895d;
+  color: #ffd082;
+}
+.completed-text {
+  color: rgb(166, 168, 167);
 }
 .mark-btn {
   color: #88e1f2;
@@ -83,10 +86,20 @@ button {
 .save-btn {
   color: #88e1f2;
   border: 1px solid #88e1f2;
+  transition: all 0.5s ease-in-out;
+}
+.save-btn:hover {
+  background-color: #88e1f2;
+  color: #2d4059;
 }
 .cancel-btn {
   color: #ff7c7c;
   border: 1px solid #ff7c7c;
+}
+.cancel-btn:hover {
+  background-color: #ff7c7c;
+  color: #2d4059;
+  transition: all 0.5s ease-in-out;
 }
 
 .form-container {
@@ -115,6 +128,7 @@ button {
   color: #88e1f2;
   border: 1px solid #88e1f2;
   cursor: pointer;
+  transition: all 0.5s ease-in-out;
 }
 .add-task:hover {
   background-color: #88e1f2;

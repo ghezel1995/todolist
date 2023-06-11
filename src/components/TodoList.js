@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import AddTaskForm from './AddTaskForm';
 import TaskFilter from './TaskFilter';
+import ButtonContainer from './ButtonContainer';
+import TitleContainer from './TitleContainer';
+import EditTaskForm from './EditTaskForm';
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
@@ -151,54 +154,27 @@ const TodoList = () => {
             <li key={todo.id} className='todo-li'>
               {editingId === todo.id ? (
                 <>
-                  <input
-                    type='text'
-                    className='edit-input'
-                    value={editedTitle}
-                    onChange={(e) => setEditedTitle(e.target.value)}
+                  <EditTaskForm
+                    editedTitle={editedTitle}
+                    setEditedTitle={setEditedTitle}
+                    handleSaveEdit={handleSaveEdit}
+                    handleCancelEdit={handleCancelEdit}
+                    todo={todo}
                   />
-                  <div className='btn-container'>
-                    <button
-                      className='save-btn'
-                      onClick={() => handleSaveEdit(todo.id)}
-                    >
-                      Save
-                    </button>
-                    <button className='cancel-btn' onClick={handleCancelEdit}>
-                      Cancel
-                    </button>
-                  </div>
                 </>
               ) : (
                 <>
-                  <span className='title-container'>
-                    <i
-                      className={`bi ${
-                        todo.completed
-                          ? 'bi-check-square completed-icon'
-                          : 'bi-hourglass-split incomplete-icon'
-                      }`}
-                    />
-                    {todo.title}
-                  </span>
-                  <div className='btn-container'>
-                    <i
-                      className={`bi ${
-                        todo.completed ? 'bi-x-lg' : 'bi bi-check-square'
-                      } mark-btn`}
-                      onClick={() => handleUpdateTodo(todo.id, !todo.completed)}
-                    >
-                      {`Mark ${todo.completed ? 'incomplete' : 'Completed'}`}
-                    </i>
-                    <i
-                      onClick={() => handleStartEdit(todo.id, todo.title)}
-                      className='bi bi-pencil-square edit-btn'
-                    ></i>
-                    <i
-                      className='bi bi-trash3 delete-btn'
-                      onClick={() => handleDeleteTodo(todo.id)}
-                    ></i>
-                  </div>
+                  <TitleContainer
+                    completed={todo.completed}
+                    title={todo.title}
+                  />
+
+                  <ButtonContainer
+                    handleUpdateTodo={handleUpdateTodo}
+                    handleStartEdit={handleStartEdit}
+                    handleDeleteTodo={handleDeleteTodo}
+                    todo={todo}
+                  />
                 </>
               )}
             </li>

@@ -20,7 +20,9 @@ const AddTaskForm = ({ onAddTask }) => {
         className='add-input'
         onChange={(e) => setTitle(e.target.value)}
       />
-      <button className='add-task' type='submit'>Add Task</button>
+      <button className='add-task' type='submit'>
+        Add Task
+      </button>
     </form>
   );
 };
