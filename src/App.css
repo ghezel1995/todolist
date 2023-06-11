@@ -47,6 +47,12 @@ i {
   margin-left: 1.2vh;
   margin-right: 2vh;
 }
+.completed-icon {
+  color: #88e1f2;
+}
+.incomplete-icon {
+  color: #ff895d;
+}
 .mark-btn {
   color: #88e1f2;
   font-size: 1rem;
@@ -57,7 +63,7 @@ i {
 .delete-btn {
   color: #ff7c7c;
 }
-.edit-input{
+.edit-input {
   width: 50%;
   background-color: transparent;
   color: #ff895d;
@@ -66,7 +72,7 @@ i {
   border: 1px solid #ff895d;
   font-size: 1.5rem;
 }
-button{
+button {
   background-color: transparent;
   padding: 2vh 4vh;
   font-size: 1.3rem;
@@ -74,28 +80,28 @@ button{
   border-radius: 2vh;
   font-weight: 700;
 }
-.save-btn{
+.save-btn {
   color: #88e1f2;
   border: 1px solid #88e1f2;
 }
-.cancel-btn{
+.cancel-btn {
   color: #ff7c7c;
   border: 1px solid #ff7c7c;
 }
 
-.form-container{
+.form-container {
   width: 90%;
   display: flex;
   justify-content: space-evenly;
 }
 
-.form{
+.form {
   width: 50%;
   display: flex;
   justify-content: space-evenly;
 }
 
-.add-input{
+.add-input {
   width: 60%;
   background-color: transparent;
   color: #ff895d;
@@ -105,17 +111,17 @@ button{
   font-size: 1.5rem;
 }
 
-.add-task{
+.add-task {
   color: #88e1f2;
   border: 1px solid #88e1f2;
   cursor: pointer;
 }
-.add-task:hover{
+.add-task:hover {
   background-color: #88e1f2;
   color: #2d4059;
 }
 
-#filter{
+#filter {
   background-color: transparent;
   border: 2px solid #eeeeee;
   border-radius: 1.5vh;
@@ -124,7 +130,7 @@ button{
   width: 20vh;
   font-size: 1.5rem;
 }
-#filter option{
+#filter option {
   background-color: transparent;
   color: #2d4059;
 }

@@ -175,8 +175,8 @@ const TodoList = () => {
                     <i
                       className={`bi ${
                         todo.completed
-                          ? 'bi-check-square'
-                          : 'bi-hourglass-split'
+                          ? 'bi-check-square completed-icon'
+                          : 'bi-hourglass-split incomplete-icon'
                       }`}
                     />
                     {todo.title}
