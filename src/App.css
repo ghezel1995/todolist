@@ -30,29 +30,24 @@ ul {
   display: flex;
   justify-content: space-between;
 }
-.title-container{
+.title-container {
   width: auto;
 }
 
-.btn-container{
+.btn-container {
   width: 25%;
   text-align: right;
 }
 
-i{
+i {
   background: none;
   font-size: 1.5rem;
   cursor: pointer;
   margin-left: 1.2vh;
   margin-right: 2vh;
 }
-
 .mark-btn {
   color: #88e1f2;
-}
-.mark-btn:hover {
-  background-color: #88e1f2;
-  color: #2d4059;
 }
 .edit-btn {
   color: #ffd082;
@@ -60,4 +55,28 @@ i{
 .delete-btn {
   color: #ff7c7c;
 }
-
+.edit-input{
+  width: 50%;
+  background-color: transparent;
+  color: #ff895d;
+  padding: 1.5vh;
+  border-radius: 1.3vh;
+  border: 1px solid #ff895d;
+  font-size: 1.5rem;
+}
+button{
+  background-color: transparent;
+  padding: 2vh 4vh;
+  font-size: 1.3rem;
+  margin-right: 1.1vh;
+  border-radius: 2vh;
+  font-weight: 700;
+}
+.save-btn{
+  color: #88e1f2;
+  border: 1px solid #88e1f2;
+}
+.cancel-btn{
+  color: #ff7c7c;
+  border: 1px solid #ff7c7c;
+}
