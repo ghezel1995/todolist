@@ -48,6 +48,7 @@ i {
 }
 .mark-btn {
   color: #88e1f2;
+  font-size: 1rem;
 }
 .edit-btn {
   color: #ffd082;
@@ -79,4 +80,30 @@ button{
 .cancel-btn{
   color: #ff7c7c;
   border: 1px solid #ff7c7c;
+}
+
+.form{
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.add-input{
+  width: 70%;
+  background-color: transparent;
+  color: #ff895d;
+  padding: 1.5vh;
+  border-radius: 1.3vh;
+  border: 1px solid #ff895d;
+  font-size: 1.5rem;
+}
+
+.add-task{
+  color: #88e1f2;
+  border: 1px solid #88e1f2;
+  cursor: pointer;
+}
+.add-task:hover{
+  background-color: #88e1f2;
+  color: #2d4059;
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import AddTaskForm from './AddTaskForm';
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
@@ -13,13 +14,22 @@ const TodoList = () => {
   const fetchTodos = async () => {
     try {
       const response = await fetch(
-        'https://jsonplaceholder.typicode.com/todos?_limit=10'
+        'https://jsonplaceholder.typicode.com/todos?_limit=6'
       );
       const data = await response.json();
       setTodos(data);
     } catch (error) {
       console.error('Error fetching todos:', error);
     }
+  };
+
+  const handleAddTask = (title, completed) => {
+    const newTask = {
+      id: todos.length + 1,
+      title: title,
+      completed: completed,
+    };
+    setTodos([newTask, ...todos]);
   };
 
   const handleUpdateTodo = async (id, completed) => {
@@ -118,6 +128,7 @@ const TodoList = () => {
   return (
     <div className='todo-container'>
       <h1>Todo List</h1>
+      <AddTaskForm onAddTask={handleAddTask} />
       <ul>
         {todos.map((todo) => (
           <li key={todo.id} className='todo-li'>
@@ -151,7 +162,7 @@ const TodoList = () => {
                 >
                   <i
                     className={`bi ${
-                      todo.completed ? 'bi-hourglass-split' : 'bi-check-square'
+                      todo.completed ? 'bi-check-square' : 'bi-hourglass-split' 
                     }`}
                   />
                   {todo.title}
@@ -163,7 +174,7 @@ const TodoList = () => {
                     } mark-btn`}
                     onClick={() => handleUpdateTodo(todo.id, !todo.completed)}
                   >
-                    {todo.completed ? 'incomplete' : 'Completed'}
+                    {`Mark ${todo.completed ? 'incomplete' : 'Completed'}`}
                   </i>
                   <i
                     onClick={() => handleStartEdit(todo.id, todo.title)}
