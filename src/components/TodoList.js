@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import AddTaskForm from './AddTaskForm';
+import TaskFilter from './TaskFilter';
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [editedTitle, setEditedTitle] = useState('');
+  const [filter, setFilter] = useState('all');
 
   useEffect(() => {
     fetchTodos();
@@ -30,6 +32,9 @@ const TodoList = () => {
       completed: completed,
     };
     setTodos([newTask, ...todos]);
+  };
+  const handleFilterChange = (filterValue) => {
+    setFilter(filterValue);
   };
 
   const handleUpdateTodo = async (id, completed) => {
@@ -128,67 +133,76 @@ const TodoList = () => {
   return (
     <div className='todo-container'>
       <h1>Todo List</h1>
-      <AddTaskForm onAddTask={handleAddTask} />
+      <div className='form-container'>
+        <AddTaskForm onAddTask={handleAddTask} />
+        <TaskFilter onFilterChange={handleFilterChange} />
+      </div>
       <ul>
-        {todos.map((todo) => (
-          <li key={todo.id} className='todo-li'>
-            {editingId === todo.id ? (
-              <>
-                <input
-                  type='text'
-                  className='edit-input'
-                  value={editedTitle}
-                  onChange={(e) => setEditedTitle(e.target.value)}
-                />
-                <div className='btn-container'>
-                  <button
-                    className='save-btn'
-                    onClick={() => handleSaveEdit(todo.id)}
-                  >
-                    Save
-                  </button>
-                  <button className='cancel-btn' onClick={handleCancelEdit}>
-                    Cancel
-                  </button>
-                </div>
-              </>
-            ) : (
-              <>
-                <span
-                  className='title-container'
-                  style={{
-                    textDecoration: todo.underline ? 'underline' : 'none',
-                  }}
-                >
-                  <i
-                    className={`bi ${
-                      todo.completed ? 'bi-check-square' : 'bi-hourglass-split' 
-                    }`}
+        {todos
+          .filter((todo) => {
+            if (filter === 'completed') {
+              return todo.completed;
+            } else if (filter === 'incomplete') {
+              return !todo.completed;
+            }
+            return true; // filter === 'all'
+          })
+          .map((todo) => (
+            <li key={todo.id} className='todo-li'>
+              {editingId === todo.id ? (
+                <>
+                  <input
+                    type='text'
+                    className='edit-input'
+                    value={editedTitle}
+                    onChange={(e) => setEditedTitle(e.target.value)}
                   />
-                  {todo.title}
-                </span>
-                <div className='btn-container'>
-                  <i
-                    className={`bi ${
-                      todo.completed ? 'bi-x-lg' : 'bi bi-check-square'
-                    } mark-btn`}
-                    onClick={() => handleUpdateTodo(todo.id, !todo.completed)}
-                  >
-                    {`Mark ${todo.completed ? 'incomplete' : 'Completed'}`}
-                  </i>
-                  <i
-                    onClick={() => handleStartEdit(todo.id, todo.title)}
-                    className='bi bi-pencil-square edit-btn'
-                  ></i>
-                  <i
-                    className='bi bi-trash3 delete-btn'
-                    onClick={() => handleDeleteTodo(todo.id)}
-                  ></i>
-                </div>
-              </>
-            )}
-          </li>
-        ))}
+                  <div className='btn-container'>
+                    <button
+                      className='save-btn'
+                      onClick={() => handleSaveEdit(todo.id)}
+                    >
+                      Save
+                    </button>
+                    <button className='cancel-btn' onClick={handleCancelEdit}>
+                      Cancel
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <span className='title-container'>
+                    <i
+                      className={`bi ${
+                        todo.completed
+                          ? 'bi-check-square'
+                          : 'bi-hourglass-split'
+                      }`}
+                    />
+                    {todo.title}
+                  </span>
+                  <div className='btn-container'>
+                    <i
+                      className={`bi ${
+                        todo.completed ? 'bi-x-lg' : 'bi bi-check-square'
+                      } mark-btn`}
+                      onClick={() => handleUpdateTodo(todo.id, !todo.completed)}
+                    >
+                      {`Mark ${todo.completed ? 'incomplete' : 'Completed'}`}
+                    </i>
+                    <i
+                      onClick={() => handleStartEdit(todo.id, todo.title)}
+                      className='bi bi-pencil-square edit-btn'
+                    ></i>
+                    <i
+                      className='bi bi-trash3 delete-btn'
+                      onClick={() => handleDeleteTodo(todo.id)}
+                    ></i>
+                  </div>
+                </>
+              )}
+            </li>
+          ))}
       </ul>
     </div>
   );
