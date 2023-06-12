@@ -69,6 +69,11 @@ i {
 .delete-btn {
   color: #ff7c7c;
 }
+.edit-form{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .edit-input {
   width: 50%;
   background-color: transparent;

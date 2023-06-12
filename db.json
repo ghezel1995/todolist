@@ -1,0 +1,24 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "title": "go shopping",
+      "completed": true
+    },
+    {
+      "id": 2,
+      "title": "call to manager",
+      "completed": true
+    },
+    {
+      "id": 3,
+      "title": "check the bills",
+      "completed": false
+    },
+    {
+      "id": 4,
+      "title": "add new task success",
+      "completed": true
+    }
+  ]
+}

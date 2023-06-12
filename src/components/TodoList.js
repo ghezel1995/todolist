@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  fetchTasks,
+  deleteTask,
+  updateTask,
+  toggleTask,
+} from '../store/actions';
 import AddTaskForm from './AddTaskForm';
 import TaskFilter from './TaskFilter';
 import ButtonContainer from './ButtonContainer';
@@ -7,139 +14,76 @@ import TitleContainer from './TitleContainer';
 import EditTaskForm from './EditTaskForm';
 
 const TodoList = () => {
-  const [todos, setTodos] = useState([]);
-  const [editingId, setEditingId] = useState(null);
-  const [editedTitle, setEditedTitle] = useState('');
+  const dispatch = useDispatch();
+  const allTodos = useSelector((state) => state);
+  const [todos, setTodos] = useState(allTodos);
+  const [editingTaskId, setEditingTaskId] = useState(null);
+  const [editedTaskTitle, setEditedTaskTitle] = useState('');
   const [filter, setFilter] = useState('all');
 
   useEffect(() => {
-    fetchTodos();
-  }, []);
+    dispatch(fetchTasks());
+  }, [dispatch]);
 
-  const fetchTodos = async () => {
-    try {
-      const response = await fetch(
-        'https://jsonplaceholder.typicode.com/todos?_limit=6'
-      );
-      const data = await response.json();
-      setTodos(data);
-    } catch (error) {
-      console.error('Error fetching todos:', error);
+  useEffect(() => {
+    filterTasks();
+  }, [allTodos, filter]);
+
+  const filterTasks = () => {
+    switch (filter) {
+      case 'completed':
+        setTodos(allTodos.filter((todo) => todo.completed));
+        break;
+      case 'incomplete':
+        setTodos(allTodos.filter((todo) => !todo.completed));
+        break;
+      default:
+        setTodos(allTodos);
     }
   };
 
-  const handleAddTask = (title, completed) => {
-    const newTask = {
-      id: todos.length + 1,
-      title: title,
-      completed: completed,
+  const handleDelete = (taskId) => {
+    dispatch(deleteTask(taskId));
+  };
+
+  const handleUpdate = (todo) => {
+    setEditingTaskId(todo.id);
+    setEditedTaskTitle(todo.title);
+  };
+  const handleSave = (e) => {
+    e.preventDefault();
+
+    if (editedTaskTitle.trim() === '') {
+      return;
+    }
+
+    const updatedTask = {
+      id: editingTaskId,
+      title: editedTaskTitle,
+      completed: false,
     };
-    setTodos([newTask, ...todos]);
+
+    dispatch(updateTask(updatedTask));
+    setEditingTaskId(null);
+    setEditedTaskTitle('');
   };
-  const handleFilterChange = (filterValue) => {
-    setFilter(filterValue);
+  const handleCancel = () => {
+    setEditingTaskId(null);
+    setEditedTaskTitle('');
   };
 
-  const handleUpdateTodo = async (id, completed) => {
-    try {
-      const response = await fetch(
-        `https://jsonplaceholder.typicode.com/todos/${id}`,
-        {
-          method: 'PUT',
-          body: JSON.stringify({ completed }),
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        }
-      );
-      if (response.ok) {
-        setTodos(
-          todos.map((item) => {
-            if (item.id === id) {
-              return {
-                ...item,
-                completed: !item.completed,
-              };
-            }
-            return item;
-          })
-        );
-      } else {
-        console.error('Error updating todo:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error updating todo:', error);
-    }
+  const handleToggle = (todo) => {
+    dispatch(toggleTask(todo));
   };
-
-  const handleEditTodo = async (id, newTitle) => {
-    try {
-      const response = await fetch(
-        `https://jsonplaceholder.typicode.com/todos/${id}`,
-        {
-          method: 'PUT',
-          body: JSON.stringify({ title: newTitle }),
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        }
-      );
-      if (response.ok) {
-        const updatedTodo = await response.json();
-        const updatedTodos = todos.map((todo) =>
-          todo.id === updatedTodo.id ? updatedTodo : todo
-        );
-        setTodos(updatedTodos);
-      } else {
-        console.error('Error updating todo:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error updating todo:', error);
-    }
-  };
-
-  const handleStartEdit = (id, title) => {
-    setEditingId(id);
-    setEditedTitle(title);
-  };
-
-  const handleCancelEdit = () => {
-    setEditingId(null);
-    setEditedTitle('');
-  };
-
-  const handleSaveEdit = (id) => {
-    handleEditTodo(id, editedTitle);
-    setEditingId(null);
-    setEditedTitle('');
-  };
-
-  const handleDeleteTodo = async (id) => {
-    try {
-      const response = await fetch(
-        `https://jsonplaceholder.typicode.com/todos/${id}`,
-        {
-          method: 'DELETE',
-        }
-      );
-      if (response.ok) {
-        const updatedTodos = todos.filter((todo) => todo.id !== id);
-        setTodos(updatedTodos);
-      } else {
-        console.error('Error deleting todo:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error deleting todo:', error);
-    }
+  const handleFilterChange = (filter) => {
+    setFilter(filter);
   };
 
   return (
     <div className='todo-container'>
-      <h1>
-        Todo List
-      </h1>
+      <h1>Todo List</h1>
       <div className='form-container'>
-        <AddTaskForm onAddTask={handleAddTask} />
+        <AddTaskForm />
         <TaskFilter onFilterChange={handleFilterChange} />
       </div>
       <ul>
@@ -154,13 +98,13 @@ const TodoList = () => {
           })
           .map((todo) => (
             <li key={todo.id} className='todo-li'>
-              {editingId === todo.id ? (
+              {editingTaskId === todo.id ? (
                 <>
                   <EditTaskForm
-                    editedTitle={editedTitle}
-                    setEditedTitle={setEditedTitle}
-                    handleSaveEdit={handleSaveEdit}
-                    handleCancelEdit={handleCancelEdit}
+                    taskId={todo.id}
+                    initialTitle={todo.title}
+                    onSave={handleSave}
+                    onCancel={handleCancel}
                     todo={todo}
                   />
                 </>
@@ -172,9 +116,9 @@ const TodoList = () => {
                   />
 
                   <ButtonContainer
-                    handleUpdateTodo={handleUpdateTodo}
-                    handleStartEdit={handleStartEdit}
-                    handleDeleteTodo={handleDeleteTodo}
+                    handleUpdateTodo={() => handleToggle(todo)}
+                    handleStartEdit={() => handleUpdate(todo)}
+                    handleDeleteTodo={() => handleDelete(todo.id)}
                     todo={todo}
                   />
                 </>

@@ -1,14 +1,29 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addTask } from '../store/actions';
 
-const AddTaskForm = ({ onAddTask }) => {
-  const [title, setTitle] = useState('');
+const AddTaskForm = () => {
+  const [taskTitle, setTaskTitle] = useState('');
+  const dispatch = useDispatch();
+
+  const handleInputChange = (e) => {
+    setTaskTitle(e.target.value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (title.trim() !== '') {
-      onAddTask(title);
-      setTitle('');
+
+    if (taskTitle.trim() === '') {
+      return;
     }
+
+    const newTask = {
+      title: taskTitle,
+      completed: false,
+    };
+
+    dispatch(addTask(newTask));
+    setTaskTitle('');
   };
 
   return (
@@ -16,9 +31,9 @@ const AddTaskForm = ({ onAddTask }) => {
       <input
         type='text'
         placeholder='Enter task title'
-        value={title}
         className='add-input'
-        onChange={(e) => setTitle(e.target.value)}
+        value={taskTitle}
+        onChange={handleInputChange}
       />
       <button className='add-task' type='submit'>
         Add Task
