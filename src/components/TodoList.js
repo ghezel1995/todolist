@@ -135,7 +135,9 @@ const TodoList = () => {
 
   return (
     <div className='todo-container'>
-      <h1>Todo List</h1>
+      <h1>
+        Todo List
+      </h1>
       <div className='form-container'>
         <AddTaskForm onAddTask={handleAddTask} />
         <TaskFilter onFilterChange={handleFilterChange} />

@@ -5,6 +5,9 @@ body {
   font-family: 'Aref Ruqaa Ink', serif;
   font-family: 'Signika Negative', sans-serif;
 }
+.todo-icon{
+  font-size: 3rem;
+}
 .todo-container {
   background-color: #2d4059;
   width: 80%;
