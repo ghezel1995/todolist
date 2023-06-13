@@ -1,12 +1,12 @@
 # Getting Started with Create React App
 
-##`npm install react-redux redux redux-thunk`
+###`npm install react-redux redux redux-thunk`
 download the dependencies with running this code
 
-##`npm i bootstrap-icons`
+###`npm i bootstrap-icons`
 install the bootstraps icons
 
-##`npm install json-server --save-dev`
+###`npm install json-server --save-dev`
 install json-server library
 
 
