@@ -42,3 +42,6 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 ## npm install react-redux redux redux-thunk
 ** download the dependencies with running this code
+
+## `npm i bootstrap-icons`
+install the bootstraps icons
