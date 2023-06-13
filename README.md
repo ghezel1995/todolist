@@ -8,10 +8,11 @@
 ## `npm i bootstrap-icons`
 install the bootstraps icons
 
+##`npm install json-server --save-dev`
+*install json-server library
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
+##`json-server --watch db.json --port 8000`
+run this code for run server
 
 In the project directory, you can run:
 
