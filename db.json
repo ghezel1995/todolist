@@ -6,11 +6,6 @@
       "completed": true
     },
     {
-      "id": 2,
-      "title": "call to manager",
-      "completed": true
-    },
-    {
       "id": 3,
       "title": "check the bills",
       "completed": false
@@ -19,6 +14,16 @@
       "id": 4,
       "title": "add new task success",
       "completed": true
+    },
+    {
+      "title": "add",
+      "completed": true,
+      "id": 5
+    },
+    {
+      "title": "ok",
+      "completed": false,
+      "id": 6
     }
   ]
 }
