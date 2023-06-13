@@ -1,7 +1,7 @@
 # Getting Started with Create React App
 
 
-## npm install react-redux redux redux-thunk
+## `npm install react-redux redux redux-thunk`
 ** download the dependencies with running this code
 
 
