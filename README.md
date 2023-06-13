@@ -9,10 +9,10 @@
 install the bootstraps icons
 
 ##`npm install json-server --save-dev`
-*install json-server library
+**install json-server library
 
 ##`json-server --watch db.json --port 8000`
-run this code for run server
+**run this code for run server
 
 In the project directory, you can run:
 
