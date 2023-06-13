@@ -1,27 +1,22 @@
 {
   "todos": [
     {
-      "id": 1,
-      "title": "go shopping",
-      "completed": true
-    },
-    {
       "id": 3,
       "title": "check the bills",
       "completed": false
     },
     {
       "id": 4,
-      "title": "add new task success",
+      "title": "workout",
       "completed": true
     },
     {
-      "title": "add",
+      "title": "go shopping",
       "completed": true,
       "id": 5
     },
     {
-      "title": "ok",
+      "title": "say hello to friends",
       "completed": false,
       "id": 6
     }
