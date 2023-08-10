@@ -11,8 +11,7 @@ export const fetchTasks = () => {
   };
 };
 
-export const addTask = (task) => {
-  return (dispatch) => {
+export const addTask = (task) => {  return (dispatch) => {
     return fetch('http://localhost:8000/todos', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
