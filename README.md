@@ -43,8 +43,8 @@ Follow these steps to set up the project on your local machine.
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/todo-list-app.git
-   cd todo-list-app
+   git clone https://github.com/ghezel1995/todolist.git
+   cd todos
    ```
 
 2. **Install dependencies:**
@@ -73,11 +73,11 @@ Follow these steps to set up the project on your local machine.
    npm start
    ```
 
-   This will start the React app on `http://localhost:3000/todolist`.
+   This will start the React app on `http://localhost:8001/todolist`.
 
 ## Usage
 
-1. Open your browser and navigate to `http://localhost:3000/todolist`.
+1. Open your browser and navigate to `http://localhost:8001/todolist`.
 2. Add tasks using the input field and the "Add Task" button.
 3. Mark tasks as completed by clicking the checkbox.
 4. Delete tasks by clicking the delete icon.
